@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Check Tax Rate</title>
+<th:block th:include="layout/header"></th:block>
+</head>
+<body>
+	<div class="container py-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<form th:action="@{/taxretrieve/rate}" method="get"
+					class="border p-4 rounded shadow-sm bg-light">
+					<div class="mb-3" th:if="${not #lists.isEmpty(municipalities)}">
+						<label for="municipalityDropdown" class="form-label fw-bold">Select
+							Municipality</label> <select class="form-select" name="municipality"
+							id="municipalityDropdown" required>
+							<option value="" disabled selected>-- Choose a
+								municipality --</option>
+							<option th:each="municipality : ${municipalities}"
+								th:value="${municipality.id}"
+								th:selected="${municipality.id == selectedMunicipalityId}"
+								th:text="${municipality.name}">Municipality</option>
+						</select>
+					</div>
+
+					<div class="mb-3">
+						<label for="dateInput" class="form-label fw-bold">Select
+							Date</label> <input type="date" id="dateInput" name="date"
+							class="form-control" required />
+					</div>
+
+					<div class="d-grid">
+						<button type="submit" class="btn btn-primary">Get Tax
+							Rate</button>
+					</div>
+				</form>
+
+				<div th:if="${rate != null}" class="mt-5">
+					<h4 class="mb-3 text-center">Tax Rate Information</h4>
+					<table class="table table-bordered table-hover text-center">
+						<thead class="table-light">
+							<tr>
+								<th>City</th>
+								<th>Date</th>
+								<th>Tax Rate</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td th:text="${municipality.name}">Municipality</td>
+								<td th:text="${date}"></td>
+								<td th:text="${#numbers.formatDecimal(rate, 1, 1)}">Rate</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

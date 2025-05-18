@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Check tax rate</title>
+<th:block th:include="layout/header"></th:block>
+</head>
+<body>
+	<div class="container">
+		<h2>The rate is</h2>
+
+		<div th:if="${rate != null}" class="alert alert-info"><span th:text="${rate}"></span>
+		</div>
+	</div>
+</body>
+</html>

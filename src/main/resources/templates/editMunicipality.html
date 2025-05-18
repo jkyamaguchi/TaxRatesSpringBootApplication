@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Edit municipality tax details</title>
+	<th:block th:include="layout/header"></th:block> 
+</head>
+<body>
+	<div class="container">
+		<h2>Edit municipality tax details</h2>
+		<!-- Table with municipality's fields -->
+		<div>
+			<form class="form-horizontal" th:object="${municipality}" th:action="@{/municipalities/store}" method="post"><!-- endpoint -->
+				<div class="form-group">
+					<div class="col-sm-10"> <!-- small-medium column with 10 size element -->
+						<input type="hidden" class="form-control" th:field="*{id}"/><!-- id field -->
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Name:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" th:field="*{name}"/>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label class="col-sm-2 col-form-label">Taxes:</label>
+					<div class="col-sm-10">
+						<div th:each="tax: ${taxes}" >
+							<input type="text" class="form-control" th:field="*{tax.rate}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10">
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Spring MVC application</title>
+	<th:block th:include="layout/header"></th:block>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Introduction</h4>
+                <p class="card-text">
+                    This application is developed as part of a technical task for Danske Bank. It provides
+                    functionality for managing and retrieving municipal tax rates based on different time periods.
+                    The system is implemented in Java using Spring Boot.
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4 class="card-title">Technical Task Description</h4>
+                <p class="card-text">
+                    The application manages taxes applied in different municipalities. It supports scheduling tax records
+                    with specific validity periods and enables users to query the applicable tax rate for a municipality
+                    on a given date.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Example Scenario</h4>
+                <p class="card-text">
+                    Municipality <strong>Copenhagen</strong> has the following scheduled taxes:
+                </p>
+                <ul>
+                    <li>Yearly tax: <strong>0.2</strong> — from <em>Jan 1, 2025</em> to <em>Dec 31, 2025</em></li>
+                    <li>Monthly tax: <strong>0.4</strong> — from <em>May 1, 2025</em> to <em>May 31, 2025</em></li>
+                    <li>No weekly taxes scheduled</li>
+                    <li>Daily taxes: <strong>0.1</strong> on <em>Jan 1, 2025</em> and <em>Dec 25, 2025</em></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
