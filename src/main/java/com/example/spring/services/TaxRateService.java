@@ -1,7 +1,8 @@
-package com.example.spring.service;
+package com.example.spring.services;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -9,9 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.spring.controllers.TaxRateNotFoundException;
 import com.example.spring.entities.Municipality;
 import com.example.spring.entities.TaxRate;
-import com.example.spring.repository.TaxRateRepository;
+import com.example.spring.repositories.TaxRateRepository;
 
 @Service
 public class TaxRateService {
@@ -62,14 +64,14 @@ public class TaxRateService {
 	}
 	
 	public List<TaxRate> findByMunicipality(Municipality municipality) {
-		log.info("MMMMMMMMMMM " + municipality.getId());
+		log.info("TAX RATE SERVICE - MUNICIPALITY FOUND: " + municipality.getId());
 		
 		return taxRateRepository.findByMunicipality(municipality);
 	}
 	
+	
 	public List<TaxRate> findByMunicipalityAndDate(Municipality municipality, LocalDate date) {
 		log.info("MUNICIPALITY ID " + municipality.getId());
-		
 		return taxRateRepository.findByMunicipalityAndDate(municipality, date);
 	}
 }

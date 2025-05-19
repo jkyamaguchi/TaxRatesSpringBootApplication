@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.spring.entities.Municipality;
-import com.example.spring.service.MunicipalityService;
+import com.example.spring.services.MunicipalityService;
 
 @Controller
 @RequestMapping(path="/municipalities/")

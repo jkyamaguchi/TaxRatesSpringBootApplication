@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.spring.entities.Municipality;
-import com.example.spring.service.MunicipalityService;
-import com.example.spring.service.TaxRateRetrieveService;
+import com.example.spring.services.MunicipalityService;
+import com.example.spring.services.TaxRateRetrieveService;
 
 @Controller
 @RequestMapping(path = "/taxretrieve/")
 public class TaxRateRetrieveController {
+
+	private final String VIEW_NAME = "retrieveTaxRate";
 
 	private TaxRateRetrieveService taxRateRetrieveService;
 
@@ -54,28 +57,30 @@ public class TaxRateRetrieveController {
 		model.addAttribute("municipalities", municipalityService.findAll());
 		log.info("MUNICIPALITIES " + model.getAttribute("municipalities"));
 
-		return "retrieveTaxRate";
+		return VIEW_NAME;
 	}
 
 	@GetMapping(path = "/rate")
 	public String retrieveRate(HttpServletRequest request, Municipality municipality,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, Model model) {
-		log.info("DATE = " + date);
+		try {
+			log.info("DATE = " + date);
 
-		Double rate = taxRateRetrieveService.retrieveTaxRate(municipality, date);
-		log.info("RATE RETRIEVED = " + rate);
+			Double rate = taxRateRetrieveService.retrieveTaxRate(municipality, date);
+			log.info("RATE RETRIEVED = " + rate);
 
-		DateTimeFormatter dateFormatter = DateTimeFormatter
-				.ofLocalizedDate(FormatStyle.LONG)
-				.withLocale(request.getLocale())
-				.withZone(ZoneId.systemDefault());
-		
-		model.addAttribute("municipalities", municipalityService.findAll());
-		model.addAttribute("selectedMunicipalityId", municipality.getId());
-		model.addAttribute("rate", rate);
-		model.addAttribute("date", dateFormatter.format(date));
+			DateTimeFormatter dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
+					.withLocale(request.getLocale()).withZone(ZoneId.systemDefault());
 
-		return "retrieveTaxRate";
+			model.addAttribute("municipalities", municipalityService.findAll());
+			model.addAttribute("selectedMunicipalityId", municipality.getId());
+			model.addAttribute("rate", rate);
+			model.addAttribute("date", dateFormatter.format(date));
+			return VIEW_NAME;
+			
+		} catch (NoSuchElementException e) {
+			throw new TaxRateNotFoundException("No tax rate found for the selected municipality and date.", VIEW_NAME);
+		}
 	}
 
 }

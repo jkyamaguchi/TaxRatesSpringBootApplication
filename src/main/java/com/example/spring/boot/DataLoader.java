@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import com.example.spring.entities.Municipality;
 import com.example.spring.entities.TaxRate;
-import com.example.spring.repository.MunicipalityRepository;
-import com.example.spring.repository.TaxRateRepository;
+import com.example.spring.repositories.MunicipalityRepository;
+import com.example.spring.repositories.TaxRateRepository;
 
 @Component
 public class DataLoader implements CommandLineRunner{

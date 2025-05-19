@@ -1,4 +1,4 @@
-package com.example.spring.service;
+package com.example.spring.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.spring.entities.Municipality;
-import com.example.spring.repository.MunicipalityRepository;
+import com.example.spring.repositories.MunicipalityRepository;
 
 @Service
 public class MunicipalityService {

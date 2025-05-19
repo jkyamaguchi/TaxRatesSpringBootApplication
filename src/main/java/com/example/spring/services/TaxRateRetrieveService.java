@@ -1,7 +1,6 @@
-package com.example.spring.service;
+package com.example.spring.services;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,23 +21,8 @@ public class TaxRateRetrieveService {
 	}
 
 	private Logger log = LoggerFactory.getLogger(TaxRateRetrieveService.class);
-	
-	private List<TaxRate> retrieveTaxRates(Municipality municipality){
-		return taxRateService.findByMunicipality(municipality);
-	}
-	
-	public Double retrieveTaxRate(Municipality municipality, LocalDate date) {
-//		Double tax;
-//		List<TaxRate> municipalityRates = retrieveTaxRates(municipality);
-//		log.info("ZZZZZZZZ");
-//		tax = municipalityRates.get(0).getRate();
-//		for (TaxRate rate: municipalityRates) {
-//			if (date.isAfter(rate.getStartDate()) && date.isBefore(rate.getEndDate())) {
-//				tax = rate.getRate();
-//			}
-//		}
-//		log.info("TAX = " + tax);
-//		return tax;
+		
+	public Double retrieveTaxRate(Municipality municipality, LocalDate date) {//throws TaxRateNotFoundException {
 		TaxRate vigentTax = taxRateService.findByMunicipalityAndDate(municipality, date)
 				.stream()
 				.findFirst()
