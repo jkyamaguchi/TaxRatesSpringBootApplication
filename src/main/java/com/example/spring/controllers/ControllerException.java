@@ -1,5 +1,8 @@
 package com.example.spring.controllers;
 
+import lombok.Getter;
+
+@Getter
 abstract public class ControllerException extends RuntimeException {
 
 	private static final long serialVersionUID = 10L;
@@ -10,9 +13,4 @@ abstract public class ControllerException extends RuntimeException {
 		super(message);
 		this.viewName = viewName;
 	}
-
-	public String getViewName() {
-		return viewName;
-	}
-
 }
